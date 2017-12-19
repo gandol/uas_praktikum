@@ -1,5 +1,9 @@
 <?php 
-include 'koneksi.php';
+    include 'koneksi.php';
+    include 'cek_login.php';
+    if (isset($_SESSION['admin'])|| isset($_SESSION['pegawai'])) {
+
+    }
  ?>
 <!DOCTYPE html>
 <html>
@@ -28,43 +32,43 @@ include 'koneksi.php';
             </div>
         </div>
     </nav>
-    <h2 class="text-center">Buku </h2>
-    <form action="cari_buku.php" method="POST">
-    <input type="text" placeholder="Masukkan Judul Buku" id="cari" name="kata_kunci">
-    <button class="btn btn-primary btn-sm cari" name="cari_buku" type="submit"><i class="glyphicon glyphicon-search"></i>Cari </button>
+    <form action="cari_kembali.php" method="POST">
+    <button class="btn btn-primary btn-sm cari" type="submit" name="cari_kembali">Pengembalian </button>
     </form>
+    <!-- <input type="text" placeholder="Masukkan ID Peminjaman" id="cari">
+    <button class="btn btn-primary btn-sm cari" type="button"><i class="glyphicon glyphicon-search"></i>Cari </button> -->
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Kode Buku</th>
+                    <th>ID Peminjaman</th>
+                    <th>Peminjam </th>
                     <th>Judul Buku</th>
-                    <th>Pengarang </th>
-                    <th id="pinjam">Tahun Terbit</th>
-                    <th id="jumlah">Jumlah </th>
-                    <th id="pinjam">Option </th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Status </th>
                 </tr>
             </thead>
             <tbody>
-                    <?php 
-                        $query=mysqli_query($koneksi,"SELECT * FROM buku");
-                        while ($buku=mysqli_fetch_array($query)) {
-                            echo "<tr>";
-                            echo "<td>".$buku['id']."</td>";
-                            echo "<td>".$buku['judul']."</td>";
-                            echo "<td>".$buku['Pengarang']."</td>";
-                            echo "<td>".$buku['tahun_terbit']."</td>";
-                            echo "<td>".$buku['jumlah']."</td>";
-                            echo "<td><a class='btn btn-default btn-xs' type='button' href='pinjam.php?kode=".$buku['id']."'>▶ Pinjam</a></td>";
-                             }
-                            echo "</tr>";
-                     ?>
-                    
-                
+                <?php 
+                $query=mysqli_query($koneksi,"SELECT pinjam.id,usr.nama,buku.judul,pinjam.tgl_pinjam,pinjam.status from (user usr join peminjaman pinjam on usr.username=pinjam.username) LEFT JOIN buku buku on pinjam.id_buku=buku.id where pinjam.status='belum dikembalikan'");
+                    //$data_pinjam=mysqli_fetch_assoc($query);
+                    while ($buku=mysqli_fetch_array($query)) {
+                    echo "<tr>";
+                    echo "<td>".$buku['id']." </td>";
+                    echo "<td>".$buku['nama']." </td>";
+                    echo "<td>".$buku['judul']." </td>";
+                    echo "<td>".$buku['tgl_pinjam']." </td>";
+                    echo " <td> ".$buku['status']."</td>";
+                }
+                 ?>
+                   
+                </tr>
+                <tr></tr>
             </tbody>
         </table>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>

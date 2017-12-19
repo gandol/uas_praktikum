@@ -1,9 +1,6 @@
-<?php
-    include ('cek_login.php');
-
-    if (!isset($_SESSION['admin'])) {
-        header("Location: index.php");
-    }else{
+<?php 
+if (isset($_POST['cari_kembali'])) {
+    
  ?>
 <!DOCTYPE html>
 <html>
@@ -16,6 +13,9 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Pretty-Registration-Form.css">
+    <link rel="stylesheet" href="assets/css/Bootstrap-Payment-Form.css">
+    <link rel="stylesheet" href="assets/css/Mockup-iPhone-6.css">
+    <link rel="stylesheet" href="assets/css/Material-Card.css">
 </head>
 
 <body>
@@ -27,34 +27,22 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active" role="presentation"><a href="index.php">Home </a></li>
-                    <li role="presentation"><a href="Logout.php">Logout </a></li>
+                    <li role="presentation"><a href="logout.php">Logout </a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container pilih" id="selamat">
-        <h1 class="text-center">Welcome to Admin Panel</h1>
-        <div class="col-md-3"><i class="glyphicon glyphicon-book"></i>
-            <h3 class="text-center">Buku </h3><a class="btn btn-primary" role="button" href="buku_admin.php" target="_parent">Lihat </a></div>
-        <div class="col-md-3"><i class="glyphicon glyphicon-user"></i>
-            <h3 class="text-center">Pegawai </h3>
-            <a class="btn btn-primary" role="button" href="kelola_pegawai.php" target="_parent">Lihat </a>
-        </div>
-        <div class="col-md-3"><i class="fa fa-user"></i>
-            <h3 class="text-center">Anggota </h3>
-            <a class="btn btn-primary" role="button" href="kelola_anggota.php" target="_parent">Lihat </a>
-        </div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3" id="transaksi"><i class="fa fa-th-list"></i>
-            <h3 class="text-center">Transaksi </h3>
-            <a class="btn btn-primary" role="button" href="transaksi.php" target="_parent">Lihat </a>
-        </div>
-        <div class="col-md-3"></div>
-    </div>
+    <form action="pengembalian.php" method="POST">
+    <input type="text" placeholder="Masukkan ID Peminjaman" id="cari" name="cari">
+    <button class="btn btn-primary btn-sm cari" type="submit" name="cari_kode"><i class="glyphicon glyphicon-search"></i>Cari </button>
+    </form>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
 <?php 
-} ?>
+}else{
+    header("Location: index.php");
+}
+ ?>

@@ -35,7 +35,7 @@
         <h1 class="text-center">Welcome to SysAdmin Library</h1>
         <div class="div_user">
             <div class="col-md-3 user" id="user_1"><i class="glyphicon glyphicon-book"></i>
-                <h3 class="text-center">Buku </h3><a class="btn btn-primary" role="button" href="untitled-2.html" target="_parent">Lihat </a></div>
+                <h3 class="text-center">Buku </h3><a class="btn btn-primary" role="button" href="buku.php" target="_parent">Lihat </a></div>
             <div class="col-md-3 user" id="user_2"><i class="fa fa-chevron-down"></i>
                 <h3 class="text-center">Pinjam </h3>
                 <button class="btn btn-primary" type="button">Lihat </button>

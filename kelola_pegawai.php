@@ -1,6 +1,9 @@
-<?php 
-include 'koneksi.php';
- ?>
+<?php
+    include ('cek_login.php');
+    include 'koneksi.php';
+
+    if (isset($_SESSION['admin'])) {
+        ?>
 <!DOCTYPE html>
 <html>
 
@@ -28,39 +31,34 @@ include 'koneksi.php';
             </div>
         </div>
     </nav>
-    <h2 class="text-center">Buku </h2>
-    <form action="cari_buku.php" method="POST">
-    <input type="text" placeholder="Masukkan Judul Buku" id="cari" name="kata_kunci">
-    <button class="btn btn-primary btn-sm cari" name="cari_buku" type="submit"><i class="glyphicon glyphicon-search"></i>Cari </button>
-    </form>
+    <h2 class="text-center">Pegawai </h2>
+    <a class="btn btn-primary btn-sm" role="" name="tambah" href="form_tambah_pegawai.php"><strong> </strong><i class="glyphicon glyphicon-plus"></i><strong>Tambah</strong></a>
+    <header></header>
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Kode Buku</th>
-                    <th>Judul Buku</th>
-                    <th>Pengarang </th>
-                    <th id="pinjam">Tahun Terbit</th>
-                    <th id="jumlah">Jumlah </th>
-                    <th id="pinjam">Option </th>
+                    <th>Nama </th>
+                    <th>Username </th>
+                    <th id="jabatan">Jabatan </th>
+                    <th id="pinjam">Password </th>
                 </tr>
             </thead>
             <tbody>
-                    <?php 
-                        $query=mysqli_query($koneksi,"SELECT * FROM buku");
-                        while ($buku=mysqli_fetch_array($query)) {
-                            echo "<tr>";
-                            echo "<td>".$buku['id']."</td>";
-                            echo "<td>".$buku['judul']."</td>";
-                            echo "<td>".$buku['Pengarang']."</td>";
-                            echo "<td>".$buku['tahun_terbit']."</td>";
-                            echo "<td>".$buku['jumlah']."</td>";
-                            echo "<td><a class='btn btn-default btn-xs' type='button' href='pinjam.php?kode=".$buku['id']."'>▶ Pinjam</a></td>";
-                             }
-                            echo "</tr>";
-                     ?>
-                    
-                
+                <?php 
+                    $query=mysqli_query($koneksi,"SELECT * FROM user where level=2");
+                    while ($pegawai= mysqli_fetch_array($query)) {
+                        echo "<tr>";
+                        echo "<td>".$pegawai['nama']."</td>";
+                        echo "<td>".$pegawai['username']."</td>";
+                        echo "<td>".$pegawai['jabatan']."</td>";
+                        echo "<td>";
+                        echo "<a class='btn btn-default btn-xs' type='button' href='update_password.php?user=".$pegawai['username']."'>✓ Ganti</a>";
+                        echo "</td>";
+
+                     }
+                    echo "</tr>";
+                 ?>
             </tbody>
         </table>
     </div>
@@ -68,3 +66,6 @@ include 'koneksi.php';
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php 
+}
+ ?>

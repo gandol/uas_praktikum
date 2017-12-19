@@ -31,7 +31,7 @@
             <h3 class="text-center">Buku </h3><a class="btn btn-primary" role="button" href="buku_admin.php" target="_parent">Lihat </a></div>
         <div class="col-md-3"><i class="fa fa-user"></i>
             <h3 class="text-center">Anggota </h3>
-            <button class="btn btn-primary" type="button">Lihat </button>
+            <a class="btn btn-primary" role="button" href="kelola_anggota.php" target="_parent">Lihat </a>
         </div>
         <div class="col-md-3"><i class="fa fa-th-list"></i>
             <h3 class="text-center">Transaksi </h3>

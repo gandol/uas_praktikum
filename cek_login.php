@@ -4,6 +4,7 @@ include ("koneksi.php");
     if (isset($_POST["login"])) {
         $username=$_POST["username"];
         $pass =$_POST["password"];
+        $cek=$pass;
 
         $query=mysqli_query($koneksi,"SELECT * FROM user WHERE username='$username' AND password='$pass'");
         if (mysqli_num_rows($query)==1) {
@@ -18,7 +19,7 @@ include ("koneksi.php");
                     $_SESSION['pegawai'] = $hasil['username'];
                     break;
                 case '3':
-                    header("Location: halaman_utama_anggota.php");
+                    header("Location: halaman_anggota.php");
                     $_SESSION['anggota'] = $hasil['username'];
                     break;
                 default:

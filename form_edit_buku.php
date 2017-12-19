@@ -1,7 +1,19 @@
 <?php
     include ('cek_login.php');
+    include 'koneksi.php';
 
     if (isset($_SESSION['admin'])|| isset($_SESSION['pegawai'])) {
+        if (!isset($_GET['u'])) {
+            header("Location: buku_admin.php");
+            
+        }else{
+            $id=$_GET['u'];
+            $query=mysqli_query($koneksi,"SELECT * FROM buku WHERE id='$id'");
+            $data_buku=mysqli_fetch_assoc($query);
+
+            if (mysqli_num_rows($query)<1) {
+                header("Location: index.php");
+            }else{     
         ?>
 <!DOCTYPE html>
 <html>
@@ -32,14 +44,15 @@
     </nav>
     <div class="row register-form">
         <div class="col-md-8 col-md-offset-2">
-            <form class="form-horizontal custom-form" action="tambah_buku.php" method="POST">
-                <h1>Tambah Buku</h1>
+            <form class="form-horizontal custom-form" action="proses_edit_buku.php" method="POST">
+                <h1>Edit Buku</h1>
+                <input class="form-control" type="hidden" name="kode" value="<?php echo $data_buku['id'] ?>">
                 <div class="form-group">
                     <div class="col-sm-4 label-column">
                         <label class="control-label" for="name-input-field">Judul </label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="text" name="judul_buku">
+                        <input class="form-control" type="text" name="edit_judul_buku" value="<?php echo $data_buku['judul'] ?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -47,7 +60,7 @@
                         <label class="control-label" for="email-input-field">Pengarang </label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="text" name="author">
+                        <input class="form-control" type="text" name="edit_author" value="<?php echo $data_buku['Pengarang'] ?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -55,7 +68,7 @@
                         <label class="control-label" for="pawssword-input-field">Tahun Terbit</label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" name="tahun_terbit" min="1000" max="2018">
+                        <input class="form-control" type="number" name="edit_tahun_terbit" min="1000" max="2018" value="<?php echo $data_buku['tahun_terbit'] ?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -63,12 +76,11 @@
                         <label class="control-label" for="repeat-pawssword-input-field">Jumlah </label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" name="jumlah" min="1">
+                        <input class="form-control" type="number" name="edit_jumlah" min="1" value="<?php echo $data_buku['jumlah'] ?>">
                     </div>
                 </div>
                 <div class="form-group"></div>
-                <button class="btn btn-default submit-button" type="submit" name="input">Input </button>
-                <button class="btn btn-default submit-button" type="reset">Reset </button>
+                <button class="btn btn-default submit-button" type="submit" name="update_buku">Input </button>
             </form>
         </div>
     </div>
@@ -78,6 +90,8 @@
 
 </html>
 <?php 
+        }
+            }
     }else{
         header("Location: index.php");
  

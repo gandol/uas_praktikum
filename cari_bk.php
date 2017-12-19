@@ -1,6 +1,8 @@
-<?php 
-include 'koneksi.php';
- ?>
+<?php
+    include 'koneksi.php';
+
+    if (isset($_POST['search'])) {
+        ?>
 <!DOCTYPE html>
 <html>
 
@@ -28,11 +30,7 @@ include 'koneksi.php';
             </div>
         </div>
     </nav>
-    <h2 class="text-center">Buku </h2>
-    <form action="cari_buku.php" method="POST">
-    <input type="text" placeholder="Masukkan Judul Buku" id="cari" name="kata_kunci">
-    <button class="btn btn-primary btn-sm cari" name="cari_buku" type="submit"><i class="glyphicon glyphicon-search"></i>Cari </button>
-    </form>
+    <h2 class="text-center">Buku </h2><a class="btn btn-primary btn-sm" role="button" href="form_input_buku.php" ><strong> </strong><i class="glyphicon glyphicon-plus"></i><strong>Tambah</strong></a>
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -46,8 +44,10 @@ include 'koneksi.php';
                 </tr>
             </thead>
             <tbody>
+                
                     <?php 
-                        $query=mysqli_query($koneksi,"SELECT * FROM buku");
+                        $kata_kunci=$_POST['cari'];
+                        $query=mysqli_query($koneksi,"SELECT * FROM buku WHERE judul LIKE '%$kata_kunci%' ");
                         while ($buku=mysqli_fetch_array($query)) {
                             echo "<tr>";
                             echo "<td>".$buku['id']."</td>";
@@ -55,9 +55,11 @@ include 'koneksi.php';
                             echo "<td>".$buku['Pengarang']."</td>";
                             echo "<td>".$buku['tahun_terbit']."</td>";
                             echo "<td>".$buku['jumlah']."</td>";
-                            echo "<td><a class='btn btn-default btn-xs' type='button' href='pinjam.php?kode=".$buku['id']."'>▶ Pinjam</a></td>";
-                             }
+                            echo "<td><a  class='btn btn-default btn-xs' type='button' href='form_edit_buku.php?u=".$buku['id']."'>▶ Update</a>";
+                            echo "<a class='btn btn-default btn-xs' type='button' href='pinjam_admin.php?kode=".$buku['id']."'>▶ Pinjam</a></td>";
                             echo "</tr>";
+
+                         }                        
                      ?>
                     
                 
@@ -68,3 +70,9 @@ include 'koneksi.php';
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php 
+    }else{
+        header("Location: index.php");
+ 
+}
+ ?>

@@ -1,11 +1,24 @@
 <?php
     include ('cek_login.php');
+    include 'koneksi.php';
 
     if (isset($_SESSION['admin'])|| isset($_SESSION['pegawai'])) {
+        if (!isset($_GET['user'])) {
+            // header("Location: index.php");
+            echo "gak ada session";
+        }else{
+            $id=$_GET['user'];
+            $query=mysqli_query($koneksi,"SELECT * FROM user WHERE username='$id'");
+            $data_user=mysqli_fetch_assoc($query);
+
+            if (mysqli_num_rows($query)<1) {
+                // header("Location: index.php");
+                echo "queri salah";
+                echo $query;
+            }else{     
         ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,43 +45,27 @@
     </nav>
     <div class="row register-form">
         <div class="col-md-8 col-md-offset-2">
-            <form class="form-horizontal custom-form" action="tambah_buku.php" method="POST">
-                <h1>Tambah Buku</h1>
+            <form class="form-horizontal custom-form" action="proses_update_password.php" method="POST">
+                <h1>Ganti Password</h1>
                 <div class="form-group">
                     <div class="col-sm-4 label-column">
-                        <label class="control-label" for="name-input-field">Judul </label>
+                        <label class="control-label" for="pawssword-input-field">New Passwrod</label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="text" name="judul_buku">
+                        <input type="hidden" name="level" value="<?php echo $data_user['level'] ?>">
+                        <input type="hidden" name="kode" value="<?php echo $data_user['username']?>">
+                        <input class="form-control" type="password" required="" minlength="6" name="password">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4 label-column">
-                        <label class="control-label" for="email-input-field">Pengarang </label>
+                        <label class="control-label" for="pawssword-input-field">Confirm New Passwrod</label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="text" name="author">
+                        <input class="form-control" type="password" required="" minlength="6" name="konfirm_password">
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-4 label-column">
-                        <label class="control-label" for="pawssword-input-field">Tahun Terbit</label>
-                    </div>
-                    <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" name="tahun_terbit" min="1000" max="2018">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-4 label-column">
-                        <label class="control-label" for="repeat-pawssword-input-field">Jumlah </label>
-                    </div>
-                    <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" name="jumlah" min="1">
-                    </div>
-                </div>
-                <div class="form-group"></div>
-                <button class="btn btn-default submit-button" type="submit" name="input">Input </button>
-                <button class="btn btn-default submit-button" type="reset">Reset </button>
+                <button class="btn btn-default submit-button" type="submit" name="update_pass">UPDATE </button>
             </form>
         </div>
     </div>
@@ -78,6 +75,8 @@
 
 </html>
 <?php 
+        }
+            }
     }else{
         header("Location: index.php");
  

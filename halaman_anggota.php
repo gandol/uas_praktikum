@@ -1,7 +1,6 @@
-<?php
+<?php 
     include ('cek_login.php');
-
-    if (!isset($_SESSION['admin'])) {
+    if (!isset($_SESSION['user'])) {
         header("Location: index.php");
     }else{
  ?>
@@ -27,34 +26,25 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active" role="presentation"><a href="index.php">Home </a></li>
-                    <li role="presentation"><a href="Logout.php">Logout </a></li>
+                    <li role="presentation"><a href="logout.php">Logout </a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container pilih" id="selamat">
-        <h1 class="text-center">Welcome to Admin Panel</h1>
-        <div class="col-md-3"><i class="glyphicon glyphicon-book"></i>
-            <h3 class="text-center">Buku </h3><a class="btn btn-primary" role="button" href="buku_admin.php" target="_parent">Lihat </a></div>
-        <div class="col-md-3"><i class="glyphicon glyphicon-user"></i>
-            <h3 class="text-center">Pegawai </h3>
-            <a class="btn btn-primary" role="button" href="kelola_pegawai.php" target="_parent">Lihat </a>
+        <h1 class="text-center">Welcome to SysAdmin Library</h1>
+        <div class="div_user">
+            <div class="col-md-3 user" id="user_1"><i class="glyphicon glyphicon-book"></i>
+                <h3 class="text-center">Buku </h3><a class="btn btn-primary" role="button" href="buku.php">Lihat </a></div>
+            <div class="col-md-3 user" id="user_2"><i class="fa fa-retweet"></i>
+                <h3 class="text-center">Pengembalian </h3>
+                <button class="btn btn-primary" type="button">Lihat </button>
+            </div>
         </div>
-        <div class="col-md-3"><i class="fa fa-user"></i>
-            <h3 class="text-center">Anggota </h3>
-            <a class="btn btn-primary" role="button" href="kelola_anggota.php" target="_parent">Lihat </a>
-        </div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3" id="transaksi"><i class="fa fa-th-list"></i>
-            <h3 class="text-center">Transaksi </h3>
-            <a class="btn btn-primary" role="button" href="transaksi.php" target="_parent">Lihat </a>
-        </div>
-        <div class="col-md-3"></div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
-<?php 
-} ?>
+<?php } ?>

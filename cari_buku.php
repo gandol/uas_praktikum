@@ -29,10 +29,7 @@ include 'koneksi.php';
         </div>
     </nav>
     <h2 class="text-center">Buku </h2>
-    <form action="cari_buku.php" method="POST">
-    <input type="text" placeholder="Masukkan Judul Buku" id="cari" name="kata_kunci">
-    <button class="btn btn-primary btn-sm cari" name="cari_buku" type="submit"><i class="glyphicon glyphicon-search"></i>Cari </button>
-    </form>
+
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -47,17 +44,23 @@ include 'koneksi.php';
             </thead>
             <tbody>
                     <?php 
-                        $query=mysqli_query($koneksi,"SELECT * FROM buku");
-                        while ($buku=mysqli_fetch_array($query)) {
-                            echo "<tr>";
-                            echo "<td>".$buku['id']."</td>";
-                            echo "<td>".$buku['judul']."</td>";
-                            echo "<td>".$buku['Pengarang']."</td>";
-                            echo "<td>".$buku['tahun_terbit']."</td>";
-                            echo "<td>".$buku['jumlah']."</td>";
-                            echo "<td><a class='btn btn-default btn-xs' type='button' href='pinjam.php?kode=".$buku['id']."'>▶ Pinjam</a></td>";
-                             }
-                            echo "</tr>";
+                        
+                        if (isset($_POST['cari'])) {
+                            $kata_kunci=$_POST['kata_kunci'];
+                            $query=mysqli_query($koneksi,"SELECT * FROM buku WHERE judul LIKE '%$kata_kunci%' ");
+                            while ($buku=mysqli_fetch_array($query)) {
+                                echo "<tr>";
+                                echo "<td>".$buku['id']."</td>";
+                                echo "<td>".$buku['judul']."</td>";
+                                echo "<td>".$buku['Pengarang']."</td>";
+                                echo "<td>".$buku['tahun_terbit']."</td>";
+                                echo "<td>".$buku['jumlah']."</td>";
+                                echo "<td><a class='btn btn-default btn-xs' type='button' href='pinjam.php?kode=".$buku['id']."'>▶ Pinjam</a></td>";
+                                echo "</tr>";
+                                 }
+                                
+                        }
+                        
                      ?>
                     
                 

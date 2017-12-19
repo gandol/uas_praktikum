@@ -1,7 +1,7 @@
 <?php
     include ('cek_login.php');
 
-    if (isset($_SESSION['admin'])|| isset($_SESSION['pegawai'])) {
+    if (isset($_SESSION['admin'])) {
         ?>
 <!DOCTYPE html>
 <html>
@@ -32,38 +32,30 @@
     </nav>
     <div class="row register-form">
         <div class="col-md-8 col-md-offset-2">
-            <form class="form-horizontal custom-form" action="tambah_buku.php" method="POST">
-                <h1>Tambah Buku</h1>
+            <form class="form-horizontal custom-form" action="tambah_pegawai.php" method="POST">
+                <h1>Tambah Anggota</h1>
                 <div class="form-group">
                     <div class="col-sm-4 label-column">
-                        <label class="control-label" for="name-input-field">Judul </label>
+                        <label class="control-label" for="name-input-field">Nama </label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="text" name="judul_buku">
+                        <input class="form-control" type="text" name="nama_anggota">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4 label-column">
-                        <label class="control-label" for="email-input-field">Pengarang </label>
+                        <label class="control-label" for="email-input-field">Username </label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="text" name="author">
+                        <input class="form-control" type="number" name="username_anggota">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4 label-column">
-                        <label class="control-label" for="pawssword-input-field">Tahun Terbit</label>
+                        <label class="control-label" for="pawssword-input-field">Password</label>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" name="tahun_terbit" min="1000" max="2018">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-4 label-column">
-                        <label class="control-label" for="repeat-pawssword-input-field">Jumlah </label>
-                    </div>
-                    <div class="col-sm-6 input-column">
-                        <input class="form-control" type="number" name="jumlah" min="1">
+                        <input class="form-control" type="password" name="password_anggota">
                     </div>
                 </div>
                 <div class="form-group"></div>

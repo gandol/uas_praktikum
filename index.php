@@ -47,10 +47,10 @@
                         <input name="password" class="form-control" type="password" required="">
                     </div>
                 </div>
-                <div class="checkbox">
+                <!-- <div class="checkbox">
                     <label>
                         <input type="checkbox">I've read and accept the terms and conditions</label>
-                </div>
+                </div> -->
                 <button class="btn btn-default submit-button" name="login" type="submit">Login </button>
             </form>
         </div>
